@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+
+        <meta charset="utf-8">
+
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+        <link rel="stylesheet" type="text/css" href="css/material.min.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+
+        <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="js/material.min.js"></script>
+
+        <title>RadioSET</title>
+
+
+    </head>
+    <body>
+
+    <style text="text/css">
+    audio {
+        display: none;
+    }
+    .android-header {
+        background-color: #FF4000;
+    }
+    .basic-card {
+        width: 100%;
+        height: 100px;
+    }
+    .mdl-card {
+       height: 200px;
+    }
+    </style>
+
+
+ <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+      <div class="android-header mdl-layout__header mdl-layout__header--waterfall">
+        <div class="mdl-layout__header-row">
+          <span class="android-title mdl-layout-title">
+            RadioSET
+          </span>
+          <!-- Add spacer, to align navigation to the right in desktop -->
+          <div class="android-header-spacer mdl-layout-spacer">
+            <div class="mdl-layout__drawer-button"><i class="fa fa-bars"></i></div>
+          </div>
+
+          <!-- Navigation -->
+          <div class="android-navigation-container">
+            <nav class="android-navigation mdl-navigation">
+              <a class="mdl-navigation__link mdl-typography--text-uppercase" href=""></a>
+
+            </nav>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="android-drawer mdl-layout__drawer">
+        <span class="mdl-layout-title">
+          Menú
+        </span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href=""><i class="fa fa-home"></i> Inicio</a>
+          <a class="mdl-navigation__link" href=""><i class="fa fa-star"></i> Misi&oacute;n</a>
+          <a class="mdl-navigation__link" href=""><i class="fa fa-eye"></i> Visi&oacute;n</a>
+          <a class="mdl-navigation__link" href=""><i class="fa fa-group"></i> Locutores</a>
+
+        </nav>
+      </div>
+
+      <div class="android-content mdl-layout__content">
+
+        <audio id="audio" preload="auto" controls>
+           <source src="http://streaming.radionomy.com/AYN-radio"></source>
+        </audio>
+
+        <button style="width:100%;padding:10px 0px 10px 0px;height:60px;font-size:20px;" id="audio-state" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+             <i id="play-state-pulse" class="fa fa-spinner fa-pulse"></i> 
+             <i style="display:none;" id="play-state-play" class="fa fa-play"></i> 
+             <i style="display:none;" id="play-state-pause" class="fa fa-pause"></i> 
+             Reproducir Radio
+        </button>
+
+
+
+      </div>
+    </div>
+
+        <script type="text/javascript">
+        $(document).ready(function(){
+
+             var $audio = $('#audio')[0];
+             var $playing = -1;
+
+             $audio.onloadeddata = function(){
+                  $('#play-state-pulse').hide();
+                  $('#play-state-play').show();
+                  $playing = 0;
+             }
+             
+             $('#audio-state').on('click', function(){
+                  if($playing > -1)
+                  {
+ 
+                       if($playing == 0)
+                       {
+                            $playing = 1;
+                            $('#play-state-play').hide();
+                            $('#play-state-pause').show();
+                            $audio.play();
+                       }
+                       else
+                       {
+                            $playing = 0;
+                            $('#play-state-play').show();
+                            $('#play-state-pause').hide();
+                            $audio.pause();
+                       }
+                   
+                  }
+             }); 
+
+        });
+        </script>
+
+        <script type="text/javascript" src="cordova.js"></script>
+
+
+    </body>
+</html>
